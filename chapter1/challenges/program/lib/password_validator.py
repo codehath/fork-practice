@@ -16,7 +16,12 @@
 #   Returns: True
 
 # == YOUR CODE ==
+import re
 
 def is_valid(password):
-    pass # Your code goes here (delete the `pass`)
+    characters = "!@$%&"
+    if len(password)>7:
+        if re.search(f"[{re.escape(characters)}]", password):
+            return True
+    return False
 

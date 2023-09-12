@@ -15,8 +15,10 @@
 #   Call:    starts_with_the_letter_a("Rock")
 #   Returns: False
 def starts_with_the_letter_a(string):
-    # your code goes here (delete the pass below)
-    pass
+    capitalised = string.upper()
+    if capitalised[0] == "A":
+        return True
+    return False
 
 
 # Purpose: checks if a string ends with the letter a
@@ -28,8 +30,10 @@ def starts_with_the_letter_a(string):
 #   Call:    ends_with_the_letter_a("Python")
 #   Returns: False
 def ends_with_the_letter_a(string):
-    # your code goes here (delete the pass below)
-    pass
+    capitalised = string.upper()
+    if capitalised[-1] == "A":
+        return True
+    return False
 
 
 # Purpose: checks if a string contains the word hello
@@ -41,8 +45,10 @@ def ends_with_the_letter_a(string):
 #   Call:    contains_hello("world")
 #   Returns: False
 def contains_hello(string):
-    # your code goes here (delete the pass below)
-    pass
+    capitalised = string.upper()
+    if "HELLO" in capitalised:
+        return True
+    return False
 
 
 # Purpose: replaces the word hello with the word goodbye
@@ -55,7 +61,12 @@ def contains_hello(string):
 #   Returns: "Hello folks"
 def substitute_hello_with_goodbye(string):
     # your code goes here (delete the pass below)
-    pass
+    capitalised = string.upper()
+    index = capitalised.find("HELLO")
+
+    if index!=-1:
+        return (string[:index] + "goodbye" + string[index+5:])
+    return string
 
 
 # Purpose: removes the letter x from a string
@@ -65,8 +76,7 @@ def substitute_hello_with_goodbye(string):
 #   Call:    remove_x("OXO")
 #   Returns: "OO"
 def remove_x(string):
-    # your code goes here (delete the pass below)
-    pass
+    return string.replace("x", "").replace("X", "")
 
 
 # Purpose: returns the first half of a string
@@ -75,8 +85,8 @@ def remove_x(string):
 #   Returns: "cod"
 # Note: you can assume the string will always have an even number of characters
 def first_half(string):
-    # your code goes here (delete the pass below)
-    pass
+    halfway = len(string)//2
+    return string[:halfway]
 
 
 # Purpose: returns the second half of a string
@@ -85,8 +95,8 @@ def first_half(string):
 #   Returns: "ing"
 # Note: you can assume the string will always have an even number of characters
 def second_half(string):
-    # your code goes here (delete the pass below)
-    pass
+    halfway = len(string)//2
+    return string[halfway:]
 
 
 # Congrats, you're done with this file. Move on to the next one.
