@@ -52,7 +52,9 @@ class Greeter():
 #   > animal = Animal()
 #   > animal
 #   <Animal object at 0x7f8b8c0b8e80>
-
+class Animal():
+    def __init__(self):
+        pass
 
 
 # Class name: Vehicle
@@ -65,7 +67,9 @@ class Greeter():
 #   > vehicle = Vehicle()
 #   > vehicle
 #   <Vehicle object at 0x7f8b8c0b8e80>
-
+class Vehicle():
+    def __init__(self):
+        pass
 
 
 # Class name: Cat
@@ -80,6 +84,12 @@ class Greeter():
 #   > cat = Cat()
 #   > cat.speak()
 #   'miaow'
+class Cat():
+    def __init__(self):
+        pass
+    
+    def speak(self):
+        return ("miaow")
 
 
 
@@ -95,7 +105,12 @@ class Greeter():
 #   > dog = Dog()
 #   > dog.speak()
 #   'woof'
-
+class Dog():
+    def __init__(self):
+        pass
+    
+    def speak(self):
+        return ("woof")
 
 
 # Class name: StringFormatter
@@ -115,6 +130,15 @@ class Greeter():
 #   'HELLO'
 #   > string_formatter.lower_case('HELLO')
 #   'hello'
+class StringFormatter():
+    def __init__(self):
+        pass
+
+    def block_caps(self, string):
+        return string.upper()
+    
+    def lower_case(self, string):
+        return string.lower()
 
 
 
@@ -145,7 +169,21 @@ class Greeter():
 #   1
 #   > calculator.divide(6, 2)
 #   3.0
+class Calculator():
+    def __init__(self):
+        pass
 
+    def add(self, numOne, numTwo):
+        return numOne + numTwo
+    
+    def multiply(self, numOne, numTwo):
+        return numOne * numTwo
+    
+    def subtract(self, numOne, numTwo):
+        return numOne - numTwo
+    
+    def divide(self, numOne, numTwo):
+        return numOne / numTwo
 
 
 # Class name: Apprentice
@@ -171,8 +209,13 @@ class Greeter():
 #   'June 2030'
 #   > apprentice.format_details()
 #   'Rita Smith, June 2030'
+class Apprentice():
+    def __init__(self, name, cohort):
+        self.name = name
+        self.cohort = cohort
 
-
+    def format_details(self):
+        return (f"{self.name}, {self.cohort}")
 
 # Class name: Cohort
 # Purpose: represents a cohort
@@ -204,6 +247,17 @@ class Greeter():
 #   datetime.date(2020, 9, 1)
 #   > cohort.calculate_duration()
 #   92
+from datetime import datetime
+from datetime import timedelta
+
+class Cohort():
+    def __init__(self, name, start_date, end_date):
+        self.name = name
+        self.start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
+        self.end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
+
+    def calculate_duration(self):
+        return (self.end_date - self.start_date).days
 
 
 

@@ -41,6 +41,27 @@
 #
 
 # == YOUR CODE ==
+import re
 
 class PasswordManager():
-    pass
+    def __init__(self):
+        self.allPasswords = {}
+
+
+    def is_valid(self, password):
+        characters = "!@$%&"
+        if len(password)>7:
+            if re.search(f"[{re.escape(characters)}]", password):
+                return True
+        return False
+
+    def add(self, service, password):
+        if self.is_valid(password):
+            self.allPasswords[service] = password
+    
+    def get_for_service(self, service):
+        if service in self.list_services():
+            return self.allPasswords[service]
+
+    def list_services(self):
+        return self.allPasswords.keys()
