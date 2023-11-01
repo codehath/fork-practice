@@ -20,7 +20,8 @@
 # Example:
 #   Call:    fourth_element([1, 2, 3, 4, 5])
 #   Returns: 4
-
+def fourth_element(list):
+    return list[3]
 
 
 # Method name: average
@@ -29,7 +30,8 @@
 # Example:
 #   Call:    average([3, 1, 44, 1])
 #   Returns: 12.25
-
+def average(list):
+    return sum(list)/len(list)
 
 
 # Method name: lowest_squared
@@ -38,7 +40,9 @@
 # Example:
 #   Call:    lowest_squared([5, 3, 44, 7])
 #   Returns: 9
-
+def lowest_squared(list):
+    lowest = min(list)
+    return lowest*lowest
 
 
 # Method name: highest_squared
@@ -47,7 +51,9 @@
 # Example:
 #   Call:    highest_squared([5, 3, 44, 7])
 #   Returns: 1936
-
+def highest_squared(list):
+    highest = max(list)
+    return highest*highest
 
 
 # Method name: starts_with_a
@@ -56,7 +62,8 @@
 # Example:
 #   Call:    starts_with_a(['banana', 'apple', 'orange', 'avocado'])
 #   Returns: ['apple', 'avocado']
-
+def starts_with_a(list):
+    return [word for word in list if word[0].upper() == "A"]
 
 
 # Method name: starts_with_a_vowel
@@ -65,7 +72,8 @@
 # Example:
 #   Call:    starts_with_a_vowel(['banana', 'apple', 'orange', 'avocado'])
 #   Returns: ['apple', 'orange', 'avocado']
-
+def starts_with_a_vowel(list):
+    return [word for word in list if word[0].upper() in "AEIOU"]
 
 
 # Method name: reverse_each_element
@@ -74,7 +82,9 @@
 # Example:
 #   Call:    reverse_each_element(['one', 'two'])
 #   Returns: ['eno', 'owt']
-
+def reverse_each_element(wordList):
+    listMap = map(lambda word: word[::-1], wordList)
+    return list(listMap)
 
 
 # Method name: sort_by_last_letter
@@ -83,7 +93,10 @@
 # Example:
 #   Call:    sort_by_last_letter(['banana', 'apple', 'carrot', 'avocado'])
 #   Returns: ['banana', 'apple', 'avocado', 'carrot']
-
+def sort_by_last_letter(list):
+    reversedList = reverse_each_element(list)
+    reversedList.sort()
+    return reverse_each_element(reversedList)
 
 
 # Method name: greater_than_5
@@ -92,7 +105,11 @@
 # Example:
 #   Call:    greater_than_5([9, 3, 44, 7])
 #   Returns: [9, 44, 7]
+def is_greater_than_5(number):
+    return number > 5
 
+def greater_than_5(numList):
+    return list(filter(is_greater_than_5, numList))
 
 
 # Method name: greater_than
@@ -101,7 +118,8 @@
 # Example:
 #   Call:    greater_than([9, 3, 6, 44, 7, 7], 6)
 #   Returns: [9, 44, 7, 7]
-
+def greater_than(numList, number):
+    return list(filter(lambda num: num > number, numList))
 
 
 # Method name: less_than
@@ -110,7 +128,8 @@
 # Example:
 #   Call:    less_than([9, 3, 6, 44, 1, 7, 7], 6)
 #   Returns: [3, 1]
-
+def less_than(numList, number):
+    return list(filter(lambda num: num < number, numList))
 
 
 # Method name: words_shorter_than
