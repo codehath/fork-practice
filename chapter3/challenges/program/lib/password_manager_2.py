@@ -68,5 +68,54 @@
 # == YOUR CODE ==
 
 from datetime import datetime
+import re
+
 class PasswordManager2():
-    pass
+    def __init__(self):
+        self.allPasswords = {}
+
+
+
+    def is_valid(self, password):
+        characters = "!@$%&"
+
+        justPasswords = [data[0] for data in self.allPasswords.values()]
+        if password in justPasswords:
+            return False
+        elif len(password)>7:
+            if re.search(f"[{re.escape(characters)}]", password):
+                return True
+        return False
+    
+    def add(self, service, password):
+        if self.is_valid(password):
+            self.allPasswords[service] = [password, datetime.now()]
+
+    def remove(self, service):
+        self.allPasswords.pop(service)
+
+    def update(self, service, password):
+        self.add(service, password)
+
+
+    def get_for_service(self, service):
+        if service in self.list_services():
+            return self.allPasswords[service][0]
+
+    def list_services(self):
+        return list(self.allPasswords.keys())
+    
+    def sort_services_by(self, sort, reverse = None):
+        if sort == "service":
+            sortedServices = sorted(self.allPasswords.keys())
+        elif sort == "added_on":
+            sortedList = sorted(self.allPasswords.items(), key = lambda password:password[1][1])
+            sortedServices = [x[0] for x in sortedList]
+
+        if reverse != None:
+            return sortedServices[::-1]
+        return sortedServices
+
+
+
+
