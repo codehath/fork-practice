@@ -63,6 +63,18 @@
 #   'Good night, Bobby!'
 #   > greeter.good_morning('Bobby')
 #   'Good morning, Bobby!'
+class Greeter():
+    def hello(self, name):
+        return (f"Hello, {name}!")
+    
+    def goodbye(self, name):
+        return (f"Goodbye, {name}!")
+
+    def good_night(self, name):
+        return (f"Good night, {name}!")
+
+    def good_morning(self, name):
+        return (f"Good morning, {name}!")
 
 
 
@@ -84,7 +96,15 @@
 #   > basket.add('orange')
 #   > basket.list_items()
 #   ['apple', 'banana', 'orange']
+class Basket():
+    def __init__(self):
+        self.contents = []
 
+    def add(self, item):
+        self.contents.append(item)
+
+    def list_items(self):
+        return self.contents
 
 
 # Class name: Calculator
@@ -119,8 +139,32 @@
 #   0.875
 #   > calculator.list_history()
 #   [3, 12, -1, 0.875]
+class Calculator():
+    def __init__(self):
+        self.history = []
 
+    def add(self, numOne, numTwo):
+        result = numOne + numTwo
+        self.history.append(result)
+        return result
+    
+    def multiply(self, numOne, numTwo):
+        result = numOne * numTwo
+        self.history.append(result)
+        return result
+    
+    def subtract(self, numOne, numTwo):
+        result = numOne - numTwo
+        self.history.append(result)
+        return result
+    
+    def divide(self, numOne, numTwo):
+        result = numOne / numTwo
+        self.history.append(result)
+        return result
 
+    def list_history(self):
+        return self.history
 
 # Class name: Cohort
 # Purpose: store a list of students
@@ -145,7 +189,18 @@
 #   [{'name' : 'Jo', 'employer' : 'NASA'}, {'name' : 'Alex', 'employer' : 'NASA'}, {'name' : 'Bobby', 'employer' : 'Google'}]
 #   > cohort.list_employed_by('NASA')
 #   [{'name' : 'Jo', 'employer' : 'NASA'}, {'name' : 'Alex', 'employer' : 'NASA'}]
+class Cohort():
+    def __init__(self):
+        self.cohort = []
 
+    def add_student(self, student):
+        self.cohort.append(student)
+
+    def list_students(self):
+        return self.cohort
+    
+    def list_employed_by(self, employer):
+        return [student for student in self.cohort if student["employer"] == employer]
 
 
 # Class name: Person
@@ -181,5 +236,32 @@
 #   '10 South Street'
 #   > person.get_pets()
 #   'Alex has 3 pets: a cat called Arthur, a dog called Judith, a goldfish called Gwen'
+class Person():
+    def __init__(self, information):
+        self.name = information["name"]
 
+        addresses = information["addresses"]
+        for address in addresses:
+            if address["name"] == "work":
+                self.workAddress = address
+            elif address["name"] == "home":
+                self.homeAddress = address
+
+        self.pets = information["pets"]
+
+    def get_work_address(self):
+        return (f"{self.workAddress['building']} {self.workAddress['street']}")
+        
+
+    def get_home_address(self):
+        return (f"{self.homeAddress['building']} {self.homeAddress['street']}")
+
+    def get_pets(self):
+        petString = ""
+        for pet in self.pets:
+            if petString != "":
+                petString += ", "
+            petString += f"a {pet['animal']} called {pet['name']}"
+
+        return (f"{self.name} has {len(self.pets)} pets: {petString}")
 

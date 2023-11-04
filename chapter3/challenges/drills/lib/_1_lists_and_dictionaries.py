@@ -138,7 +138,8 @@ def less_than(numList, number):
 # Example:
 #   Call:    words_shorter_than(['banana', 'apple', 'orange', 'nut', 'avocado'], 6)
 #   Returns: ['apple', 'nut']
-
+def words_shorter_than(words, number):
+    return [word for word in words if len(word) < number]
 
 
 # Method name: all_above
@@ -149,7 +150,8 @@ def less_than(numList, number):
 #   Returns: False
 #   Call:    all_above([9, 3, 6, 44, 1, 7, 7], 0)
 #   Returns: True
-
+def all_above(numbers, number):
+    return len([num for num in numbers if num > number]) == len(numbers)
 
 
 # Method name: all_below
@@ -160,7 +162,8 @@ def less_than(numList, number):
 #   Returns: False
 #   Call:    all_below([9, 3, 6, 44, 1, 7, 7], 100)
 #   Returns: True
-
+def all_below(numbers, number):
+    return len([num for num in numbers if num < number]) == len(numbers)
 
 
 # Method name: multiply_each_by
@@ -169,6 +172,8 @@ def less_than(numList, number):
 # Example:
 #   Call:    multiply_each_by([9, 3, 6, 44, 1, 7, 7], 2)
 #   Returns: [18, 6, 12, 88, 2, 14, 14]
+def multiply_each_by(numbers, number):
+    return list(map(lambda num: num*number, numbers))
 
 
 
@@ -180,6 +185,8 @@ def less_than(numList, number):
 # Example:
 #   Call:    values_summed({'cat': 4, 'person': 2, 'centipede': 100})
 #   Returns: 106
+def values_summed(dictionary):
+    return sum(dictionary.values())
 
 
 
@@ -189,7 +196,9 @@ def less_than(numList, number):
 # Example:
 #   Call:    add_key_value_pair({'cat': 4, 'person': 2, 'centipede': 100}, 'dog', 4)
 #   Returns: {'cat': 4, 'person': 2, 'centipede': 100, 'dog': 4}
-
+def add_key_value_pair(dictionary, key, value):
+    dictionary[key] = value
+    return dictionary
 
 
 # Method name: remove_key_value_pair
@@ -198,7 +207,9 @@ def less_than(numList, number):
 # Example:
 #   Call:    remove_key_value_pair({'cat': 4, 'person': 2, 'centipede': 100}, 'cat')
 #   Returns: {'person': 2, 'centipede': 100}
-
+def remove_key_value_pair(dictionary, key):
+    del dictionary[key]
+    return dictionary
 
 
 # Method name: where_value_below
@@ -207,7 +218,8 @@ def less_than(numList, number):
 # Example:
 #   Call:    where_value_below({'cat': 4, 'person': 2, 'centipede': 100}, 5)
 #   Returns: {'cat': 4, 'person': 2}
-
+def where_value_below(dictionary, number):
+    return {key:value for (key, value) in dictionary.items() if value < number}
 
 
 # Method name: where_key_starts_with
@@ -216,5 +228,5 @@ def less_than(numList, number):
 # Example:
 #   Call:    where_key_starts_with({'cat': 4, 'person': 2, 'centipede': 100}, 'c')
 #   Returns: {'cat': 4, 'centipede': 100}
-
-
+def where_key_starts_with(dictionary, letter):
+    return dict(filter(lambda pair: pair[0][0] == letter, dictionary.items()))
