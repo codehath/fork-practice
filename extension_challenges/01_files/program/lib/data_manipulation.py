@@ -134,19 +134,21 @@ def get_averages_for_month(filename):
 #   Returns: nothing, but writes header + March data to file called
 #            "AirQualityMarch.csv" in same directory as "AirQuality.csv"
 def create_march_data(filename):
-    # Get all Rows
+    # Get all rows
     data = get_file_contents(filename)
     header = data[0]
     data = data[1:]
     marchData = []
-    # Insolate March Rows
+
+    # Isolate March rows
     for row in data:
         if row[3:5] == "03":
             marchData.append(row)
+    # Include header row
     marchData.insert(0, header)
 
     # open/create "AirQualityMarch.csv"
-    # Add rows to csv , include header
+    # Add rows to csv
     with open("AirQualityMarch.csv", "w") as file:
         for line in marchData:
             file.write(f"{line}\n")
@@ -160,4 +162,27 @@ def create_march_data(filename):
 #   Returns: nothing, but files such as monthly_responses/05-2004.csv exist containing
 #            data matching responses from that month and year
 def create_monthly_responses(filename):
-    pass
+    data = get_file_contents(filename)
+    header = data[0]
+    data = data[1:]
+    monthlyData = {}
+
+    for row in data:
+        if row != ";;;;;;;;;;;;;;;;":
+            monthlyData.setdefault(row[3:10], [])
+            monthlyData[row[3:10]].append(row)
+
+    for month in monthlyData.keys():
+        print (month)
+        print(monthlyData[month])
+        monthlyData[month].insert(0, header)
+        csvName = f"{month[:2]}-{month[3:]}.csv"
+        path = f"monthly_responses/{csvName}"
+
+        if not os.path.exists("monthly_responses"):
+            os.makedirs("monthly_responses")
+
+        with open(path, "w") as file:
+            for line in monthlyData[month]:
+                file.write(f"{line}\n")
+
