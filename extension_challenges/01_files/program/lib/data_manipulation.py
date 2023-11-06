@@ -115,7 +115,17 @@ def christmas_day_average_air_quality(filename):
 # Notes:
 # * Data from months across multiple years should all be averaged together
 def get_averages_for_month(filename):
-    pass
+    data = get_file_contents(filename)[1:]
+    separatedData = []
+    PT08Vals = {key: [] for key in range(1, 13)}
+    for row in data:
+        separatedData = row.split(';')
+        # print(separatedData[0][3:5])
+        if separatedData[0] != "":
+            key = int(separatedData[0][3:5])
+            PT08Vals[key].append(int(separatedData[3]))
+    return {key: float("{:.2f}".format(sum(value)/len(value))) for (key, value) in PT08Vals.items()}
+
 
 # Purpose: write only the rows relating to March (any year) to a new file, in the same
 # location as the original, including the header row of labels
@@ -124,7 +134,23 @@ def get_averages_for_month(filename):
 #   Returns: nothing, but writes header + March data to file called
 #            "AirQualityMarch.csv" in same directory as "AirQuality.csv"
 def create_march_data(filename):
-    pass
+    # Get all Rows
+    data = get_file_contents(filename)
+    header = data[0]
+    data = data[1:]
+    marchData = []
+    # Insolate March Rows
+    for row in data:
+        if row[3:5] == "03":
+            marchData.append(row)
+    marchData.insert(0, header)
+
+    # open/create "AirQualityMarch.csv"
+    # Add rows to csv , include header
+    with open("AirQualityMarch.csv", "w") as file:
+        for line in marchData:
+            file.write(f"{line}\n")
+
 
 # Purpose: write monthly responses files to a new directory called "monthly_responses",
 # in the same location as AirQuality.csv, each using the name format "mm-yyyy.csv",
