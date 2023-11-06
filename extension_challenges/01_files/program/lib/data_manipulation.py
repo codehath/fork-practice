@@ -1,5 +1,5 @@
 import os
-
+import csv
 # == INSTRUCTIONS ==
 #
 # Below, you'll find lots of incomplete functions.
@@ -24,7 +24,10 @@ import os
 # Notes:
 # * Use the already imported "os" module to check whether a given filename exists
 def does_file_exist(filename):
-    pass
+    path = f"/Users/farhath/desktop/projects/python_foundations/extension_challenges/01_files/program/{filename}"
+    if os.path.exists(path):
+        return True
+    return False
 
 # Purpose: get the contents of a given file and return them; if the file cannot be
 # found, return a nice error message instead
@@ -42,7 +45,12 @@ def does_file_exist(filename):
 # * Use readlines() to read the contents
 # * Use should use does_file_exist()
 def get_file_contents(filename):
-    pass
+    if does_file_exist(filename):
+        path = f"/Users/farhath/desktop/projects/python_foundations/extension_challenges/01_files/program/{filename}"
+        with open(path, 'r') as file:
+            fileContents = [line.strip() for line in file]
+            return(fileContents)
+    return("This file cannot be found!")
 
 # Purpose: fetch Christmas Day (25th December) air quality data rows, and if
 # boolean argument "include_header_row" is True, return the first header row
@@ -61,7 +69,19 @@ def get_file_contents(filename):
 # * should use get_file_contents() - N.B. as should any subsequent
 # functions you write, using anything previously built if and where necessary
 def christmas_day_air_quality(filename, include_header_row):
-    pass
+    data = get_file_contents(filename)
+    christmasData = []
+
+    # Could be a list comprehension
+    for row in data:
+        if row[:5] == "25/12":
+            christmasData.append(row)
+    
+    if include_header_row:
+        header = data[0]
+        christmasData.insert(0, header)
+    
+    return christmasData
 
 # Purpose: fetch Christmas Day average of "PT08.S1(CO)" values to 2 decimal places
 # Example:
@@ -71,7 +91,20 @@ def christmas_day_air_quality(filename, include_header_row):
 # Date;Time;CO(GT);PT08.S1(CO);NMHC(GT);C6H6(GT);PT08.S2(NMHC);NOx(GT);PT08.S3(NOx);NO2(GT);PT08.S4(NO2);PT08.S5(O3);T;RH;AH;;
 # 10/03/2004;18.00.00;2,6;1360;150;11,9;1046;166;1056;113;1692;1268;13,6;48,9;0,7578;;
 def christmas_day_average_air_quality(filename):
-    pass
+    christmasData = christmas_day_air_quality(filename, False)
+    data = []
+    readings = []
+    for row in christmasData:
+        data.append(row.split(';'))
+    #print(data)
+    
+    for row in data:
+        readings.append(int(row[3]))
+    print(readings)
+
+    average = sum(readings)/len(readings)
+    return float("{:.2f}".format(average))
+
 
 # Purpose: scrape all the data and calculate average values for each of the 12 months
 #          for the "PT08.S1(CO)" values, returning a dictionary of keys as integer
